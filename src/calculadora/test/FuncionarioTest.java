@@ -22,7 +22,7 @@ public class FuncionarioTest {
 		try {
 			this.funcionario = new Funcionario(nome, email, salarioBase, cargo);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 	}
 	
@@ -39,36 +39,42 @@ public class FuncionarioTest {
 	public void testaExcecoesConstrutor(){
 		try{
 			this.funcionario = new Funcionario(" ", " ", 0.0, " ");
+			Assert.fail("Deveria haver falha de valor vazio");
 		}catch(Exception e){
 			Assert.assertEquals("Existe pelo menos um valor de entrada vazio.", e.getMessage());
 		}
 		
 		try{
 			this.funcionario = new Funcionario("Teste", "teste@empresa.com", 0.0, " ");
+			Assert.fail("Deveria haver falha de valor vazio");
 		}catch(Exception e){
 			Assert.assertEquals("Existe pelo menos um valor de entrada vazio.", e.getMessage());
 		}
 		
 		try{
 			this.funcionario = new Funcionario(null, null, null, null);
+			Assert.fail("Deveria haver falha de valor nulo");
 		}catch(Exception e){
 			Assert.assertEquals("Existe pelo menos um valor de entrada nulo.", e.getMessage());
 		}
 		
 		try{
 			this.funcionario = new Funcionario("Teste", "teste@empresa.com", null, "teste");
+			Assert.fail("Deveria haver falha de valor nulo");
 		}catch(Exception e){
 			Assert.assertEquals("Existe pelo menos um valor de entrada nulo.", e.getMessage());
 		}
 		
 		try{
 			this.funcionario = new Funcionario(null, " ", 0.0, " ");
+			Assert.fail("Deveria haver falha de valor nulo");
 		}catch(Exception e){
 			Assert.assertEquals("Existe pelo menos um valor de entrada nulo.", e.getMessage());
 		}
 		
 		try{
 			this.funcionario = new Funcionario(" ", null, null, null);
+			Assert.fail("Deveria haver falha de valor nulo");
 		}catch(Exception e){
 			Assert.assertEquals("Existe pelo menos um valor de entrada nulo.", e.getMessage());
 		}
@@ -77,6 +83,12 @@ public class FuncionarioTest {
 	@Test
 	public void testaSalarioLiquido(){
 		Assert.assertEquals(0.0, funcionario.getSalarioLiquido(), 0.0);
+		
+		try{
+			this.funcionario = new Funcionario("Teste", "teste@empresa.com", 10.000, "teste");
+			Assert.assertEquals(10.000, funcionario.getSalarioLiquido(), 0.0);
+		}catch(Exception e){
+			Assert.fail(e.getMessage());
+		}
 	}
-
 }

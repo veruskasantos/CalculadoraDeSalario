@@ -7,6 +7,7 @@ import org.junit.*;
 import calculadora.model.DBA;
 import calculadora.model.Desenvolvedor;
 import calculadora.model.Funcionario;
+import calculadora.model.Testador;
 
 public class FuncionarioTest {
 
@@ -190,8 +191,43 @@ public class FuncionarioTest {
 	
 	@Test
 	public void testaSalarioLiquidoTestador(){
+		//o funcionário terá desconto de 25% caso o salário seja maior ou igual que 2.000,00
+		salarioBase = 2.000;
+		try {
+			funcionario = new Testador(nome, email, salarioBase, cargo);
+		} catch (IOException e) {
+			Assert.fail(e.getMessage());
+		}
+
+		Assert.assertEquals(1.500, funcionario.calculaSalarioLiquido(salarioBase), 0.000);
+
+		salarioBase = 2.001;
+		try {
+			funcionario = new Testador(nome, email, salarioBase, cargo);
+		} catch (IOException e) {
+			Assert.fail(e.getMessage());
+		}
+
+		Assert.assertEquals(1.50075, funcionario.calculaSalarioLiquido(salarioBase), 0.000);
 		
-		
+		//ou apenas 15% caso o salário seja menor que isso.
+		salarioBase = 1.999;
+		try {
+			funcionario = new Testador(nome, email, salarioBase, cargo);
+		} catch (IOException e) {
+			Assert.fail(e.getMessage());
+		}
+
+		Assert.assertEquals(1.6991500000000002, funcionario.calculaSalarioLiquido(salarioBase), 0.000);
+
+		salarioBase = 0.0;
+		try {
+			funcionario = new Testador(nome, email, salarioBase, cargo);
+		} catch (IOException e) {
+			Assert.fail(e.getMessage());
+		}
+
+		Assert.assertEquals(0.0, funcionario.calculaSalarioLiquido(salarioBase), 0.0);
 	}
 	
 	@Test

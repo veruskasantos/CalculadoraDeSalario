@@ -4,10 +4,11 @@ import java.io.IOException;
 
 public class Funcionario {
 
-	public static final Double DESCONTO_20 = 0.2;
 	public static final Double DESCONTO_10 = 0.1;
-	public static final Double DESCONTO_25 = 0.25;
 	public static final Double DESCONTO_15 = 0.15;
+	public static final Double DESCONTO_20 = 0.2;
+	public static final Double DESCONTO_25 = 0.25;
+	public static final Double DESCONTO_30 = 0.3;
 	
 	private String nome;
 	private String email;

@@ -7,7 +7,6 @@ public class Funcionario {
 	private String nome;
 	private String email;
 	private Double salarioBase;
-	private Double salarioLiquido;
 	private String cargo;
 	
 	public Funcionario(String nome, String email, Double salarioBase, String cargo) throws IOException {
@@ -19,11 +18,14 @@ public class Funcionario {
 			throw new IOException("Existe pelo menos um valor de entrada vazio.");
 		}
 		
+		if(salarioBase < 0.0){
+			throw new IOException("O salário não pode ser negativo.");
+		}
+		
 		this.nome = nome;
 		this.email = email;
 		this.salarioBase = salarioBase;
 		this.cargo = cargo;
-		this.salarioLiquido = salarioBase;
 	}
 
 	public String getNome() {
@@ -58,8 +60,8 @@ public class Funcionario {
 		this.cargo = cargo;
 	}
 
-	public double getSalarioLiquido() {
-		return salarioLiquido;
+	public Double calculaSalarioLiquido(Double salarioBase){
+		return salarioBase;
 	}
 	
 	@Override
